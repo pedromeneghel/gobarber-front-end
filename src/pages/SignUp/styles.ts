@@ -1,10 +1,11 @@
 import styled, { keyframes } from 'styled-components';
 import { shade } from 'polished';
 
-import signUpBackgroundImg from '../../assets/sign-up-background.png';
+import signUpBackground from '../../assets/images/sign-up-background.png';
 
 export const Container = styled.div`
   height: 100vh;
+
   display: flex;
   align-items: stretch;
 `;
@@ -12,12 +13,13 @@ export const Container = styled.div`
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  place-content: center;
   align-items: center;
   justify-content: center;
+
   width: 100%;
   max-width: 700px;
 `;
+
 const appearFromRight = keyframes`
   from {
     opacity: 0;
@@ -25,20 +27,17 @@ const appearFromRight = keyframes`
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0px);
   }
 `;
 
 export const AnimationContainer = styled.div`
-  animation: ${appearFromRight} 1s;
-
   display: flex;
   flex-direction: column;
-  place-content: center;
   align-items: center;
+  justify-content: center;
 
-  width: 100%;
-  max-width: 700px;
+  animation: ${appearFromRight} 1s;
 
   form {
     margin: 80px 0;
@@ -48,19 +47,30 @@ export const AnimationContainer = styled.div`
     h1 {
       margin-bottom: 24px;
     }
+
+    a {
+      color: #f4ede8;
+      display: block;
+      margin-top: 8px;
+      text-decoration: none;
+      transition: all 0.2s;
+
+      &:hover {
+        color: ${shade(0.2, '#f4ede8')};
+      }
+    }
   }
 
   > a {
-    color: #f4ede8;
-    display: block;
-    margin-top: 24px;
-    text-decoration: none;
+    color: #ff9000;
     display: flex;
     align-items: center;
-    transition: color 0.2s;
+    margin-top: 8px;
+    text-decoration: none;
+    transition: all 0.2s;
 
     &:hover {
-      color: ${shade(0.2, '#f4ede8')};
+      color: ${shade(0.2, '#ff9000')};
     }
 
     svg {
@@ -71,6 +81,6 @@ export const AnimationContainer = styled.div`
 
 export const Background = styled.div`
   flex: 1;
-  background: url(${signUpBackgroundImg}) no-repeat center;
+  background: url(${signUpBackground}) no-repeat center;
   background-size: cover;
 `;

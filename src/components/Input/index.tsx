@@ -22,13 +22,13 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   const [isFilled, setIsFilled] = useState(false);
   const { fieldName, defaultValue, error, registerField } = useField(name);
 
-  const handleInputBlur = useCallback(() => {
-    setIsFocused(false);
-    setIsFilled(!!inputRef.current?.value);
+  const handleInputFocus = useCallback(() => {
+    setIsFocused(true);
   }, []);
 
-  const handleInpuFocus = useCallback(() => {
-    setIsFocused(true);
+  const handleInputBlur = useCallback(() => {
+    setIsFilled(!!inputRef.current?.value);
+    setIsFocused(false);
   }, []);
 
   useEffect(() => {
@@ -38,19 +38,20 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
       path: 'value',
     });
   }, [fieldName, registerField]);
+
   return (
     <Container isErrored={!!error} isFocused={isFocused} isFilled={isFilled}>
       {Icon && <Icon size={20} />}
       <input
-        {...rest}
-        ref={inputRef}
         defaultValue={defaultValue}
-        onFocus={handleInpuFocus}
+        ref={inputRef}
+        onFocus={handleInputFocus}
         onBlur={handleInputBlur}
+        {...rest}
       />
       {error && (
         <Error title={error}>
-          <FiAlertCircle color="#C53030" size={20} />
+          <FiAlertCircle color="#c53030" size={20} />
         </Error>
       )}
     </Container>

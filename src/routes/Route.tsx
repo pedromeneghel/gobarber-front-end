@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-  Route as ReactDOMRoute,
   RouteProps as ReactDOMRouteProps,
+  Route as ReactDOMRoute,
   Redirect,
 } from 'react-router-dom';
 
@@ -12,7 +12,7 @@ interface RouteProps extends ReactDOMRouteProps {
   component: React.ComponentType;
 }
 
-const Routes: React.FC<RouteProps> = ({
+const Route: React.FC<RouteProps> = ({
   isPrivate = false,
   component: Component,
   ...rest
@@ -22,14 +22,15 @@ const Routes: React.FC<RouteProps> = ({
   return (
     <ReactDOMRoute
       {...rest}
-      render={({ location }) => {
-        return isPrivate === !!user ? (
-          <Component />
-        ) : (
+      render={() => {
+        if (isPrivate === !!user) {
+          return <Component />;
+        }
+
+        return (
           <Redirect
             to={{
               pathname: isPrivate ? '/' : '/dashboard',
-              state: { from: location },
             }}
           />
         );
@@ -37,5 +38,4 @@ const Routes: React.FC<RouteProps> = ({
     />
   );
 };
-
-export default Routes;
+export default Route;
